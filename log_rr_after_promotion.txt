@@ -1,0 +1,65 @@
+root@ip-10-2-10-123:~# mysql -h database-secondary.cgz9cbkskn3y.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 352
+Server version: 8.0.35 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.002 sec)
+
+MySQL [(none)]> use udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> select * from Student;
+ERROR 2026 (HY000): TLS/SSL error: unexpected eof while reading
+MySQL [udacity]> select * from Student;
+ERROR 2006 (HY000): Server has gone away
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: udacity
+
++----+-------+
+| Id | User  |
++----+-------+
+|  1 | John  |
+|  2 | Bob   |
+|  3 | Danna |
++----+-------+
+3 rows in set (0.063 sec)
+
+MySQL [udacity]> INSERT INTO (Id, User values ("4", "Tom");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(Id, User values ("4", "Tom")' at line 1
+MySQL [udacity]> INSERT INTO (Id, User) values ("4", "Tom");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(Id, User) values ("4", "Tom")' at line 1
+MySQL [udacity]> INSERT INTO Student (Id, User) values (4, "Tom");
+Query OK, 1 row affected (0.005 sec)
+
+MySQL [udacity]> select * from Student;
++----+-------+
+| Id | User  |
++----+-------+
+|  1 | John  |
+|  2 | Bob   |
+|  3 | Danna |
+|  4 | Tom   |
++----+-------+
+4 rows in set (0.001 sec)
+
+MySQL [udacity]> exit
+Bye
+root@ip-10-2-10-123:~# 

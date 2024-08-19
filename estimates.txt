@@ -1,0 +1,8 @@
+1.Minimum RTO for a single AZ outage:
+In multi-AZ deployments, if one AZ loses power, Amazon RDS automatically fails over to the other standby AZs, so this transition doesn't take long. Estimated time 5-10 minutes
+2.Minimum RTO for a single region outage:
+When a power outage occurs in a region during the day, it can immediately attract the attention of on-site staff. They will perform actions such as logging into the AWS console, diagnosing the problem, repairing it, and moving the read replica from the secondary region to the primary region. If it is at night, the system will take at least 5 minutes to send a notification to the phone device to wake up the staff. Estimated time is 50-60 minutes.
+3.Minimum RPO for a single AZ outage:
+Every 5 minutes RDS will update the transaction once, if there is an incident right after updating the transaction, there may be no data loss. So RPO will be between 0-5 minutes
+4.Minimum RPO for a single region outage:
+When multi-AZ is enabled, the database is synchronized between the primary database and the read replica. When a region fails, it takes about 20 minutes to failover. So RPO will be between 20 minutes

@@ -1,0 +1,63 @@
+root@ip-10-1-10-107:~# mysql -h database-primary.cgr5wfrtjeja.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 320
+Server version: 8.0.35 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.019 sec)
+
+MySQL [(none)]> select *  from udacity;
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> use udacity
+Database changed
+MySQL [udacity]> select * from udacity;
+ERROR 1146 (42S02): Table 'udacity.udacity' doesn't exist
+MySQL [udacity]> CREATE TABLE Student (
+    ->     ->     Id INT NOT NULL,
+    ->     ->     User  CHAR(20) NOT NULL,
+    ->     
+    -> ^C
+MySQL [udacity]> cls
+    -> ^C
+MySQL [udacity]> ^C
+MySQL [udacity]> ^C
+MySQL [udacity]> CREATE TABLE Student (Id INT NOT NULL,
+    -> User  CHAR(20) NOT NULL,
+    -> PRIMARY KEY(Id));
+Query OK, 0 rows affected (0.084 sec)
+
+MySQL [udacity]> select * from Student;
+Empty set (0.004 sec)
+
+MySQL [udacity]> INSERT INTO Student (Id, User) values (1, "John"), (2, "Bob"), (3, "Danna");
+Query OK, 3 rows affected (0.007 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MySQL [udacity]> select * from Student;
++----+-------+
+| Id | User  |
++----+-------+
+|  1 | John  |
+|  2 | Bob   |
+|  3 | Danna |
++----+-------+
+3 rows in set (0.001 sec)
+
+MySQL [udacity]> exit
+Bye
+root@ip-10-1-10-107:~# ^C
+root@ip-10-1-10-107:~# 
